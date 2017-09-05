@@ -1,0 +1,148 @@
+# Predefined data
+x <- -50:200
+IR <- 5
+num_pos <- 30 # size of the original data
+num_neg <- IR %*% num_pos
+r_pos <- 25 # radius of the circle
+r_neg <- 45
+c_pos <- c(30,30) # center of the circle
+c_neg <- c(55,55)
+data_pos <- cbind(runif(num_pos, min = 5, max = 55),runif(num_pos, min = 5, max = 55))
+data_neg <- cbind(runif(num_neg, min = 10, max = 100),runif(num_neg, min = 10, max = 100))
+
+
+# Confine data in a circle domain
+filter_data <- function(data, center, radius){
+    row_index <- NULL
+    for (i in 1:nrow(data)){
+        if ((data[i,1]-center[1])^2 + (data[i,2]-center[2])^2 > radius^2){
+            row_index <- c(row_index, i)
+        }#if
+    }#for
+    return(data[-row_index,])
+}#func
+
+sample_pos <- filter_data(data_pos,c_pos,r_pos)
+sample_neg <- filter_data(data_neg,c_neg,r_neg)
+centroid_pos <- c(mean(sample_pos[,1]),mean(sample_pos[,2]))
+centroid_neg <- c(mean(sample_neg[,1]),mean(sample_neg[,2]))
+test_sample <- 0.4*c(centroid_neg[1]+centroid_pos[1],centroid_neg[2]+centroid_pos[2])
+
+
+# Calculate hyperplanes
+PILD <- function(data1,data2){
+    y <- c(rep(1,nrow(data1)), rep(-1,nrow(data2)))
+    d <- rep(1,nrow(data1)+nrow(data2))
+    X <- cbind(d,rbind(data1,data2))
+    w_all <- solve(t(X)%*%X) %*% t(X) %*% y
+    return(w_all) # b,w1,w2
+}#func
+
+w1 <- PILD(sample_pos,sample_neg)[2]
+w2 <- PILD(sample_pos,sample_neg)[3]
+b <- PILD(sample_pos,sample_neg)[1]
+b_pos <- (-sum(c(w1,w2)*centroid_pos))
+b_neg <- (-sum(c(w1,w2)*centroid_neg))
+ld <- -(w1*x + b)/w2
+lpos <- -(w1*x + b_pos)/w2
+lneg <- -(w1*x + b_neg)/w2
+
+# Achieve sub-set of bilateral samples
+filter_sample <- function(samples, w, b, tag){
+    samples_index <- samples %*% w + rep(b,nrow(samples))
+    if (tag==1){
+        sub_samples <- samples[samples_index < 0,]
+    }else{
+        sub_samples <- samples[samples_index > 0,]
+    }#if-else    
+    return(sub_samples)
+}#func
+
+sub_pos <- filter_sample(sample_pos, c(w1,w2), b_pos, 1)
+sub_neg <- filter_sample(sample_neg, c(w1,w2), b_neg, 0)
+sub_pos <- filter_sample(sub_pos, c(w1,w2), b_neg, 0)
+sub_neg <- filter_sample(sub_neg, c(w1,w2), b_pos, 1)
+
+# Draw diagram
+
+opar <- par(no.readonly=TRUE)
+par(cex=1.5,lwd=1.5, cex.main=2, font=2)
+
+layout(matrix(c(1:6),3,2, byrow=TRUE))
+# Original binary-class recognition problem
+plot(sample_pos[,1],sample_pos[,2], type="p",
+     pch=1, col="red",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(sample_neg[,1],sample_neg[,2], type="p",pch=3, col="blue")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+title(main="Step 0")
+
+# Draw the original hyperplane through PILD
+plot(sample_pos[,1],sample_pos[,2], type="p",
+     pch=1, col="red",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(sample_neg[,1],sample_neg[,2], type="p",pch=3, col="blue")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+lines(x,ld, type="l",lty=1, col="black")
+title(main="Step 1")
+
+# Draw two new hyperplanes through centroids and paralleling the original hyperplane
+plot(sample_pos[,1],sample_pos[,2], type="p",
+     pch=1, col="red",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(sample_neg[,1],sample_neg[,2], type="p",pch=3, col="blue")
+lines(centroid_pos[1],centroid_pos[2], type="p",pch=13, col="red")
+lines(centroid_neg[1],centroid_neg[2], type="p",pch=16, col="blue")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+lines(x,ld, type="l",lty=1, col="black")
+lines(x,lpos, type="l",lty=2, col="black")
+lines(x,lneg, type="l",lty=3, col="black")
+title(main="Step 2")
+
+# Filter the safe samples
+plot(sub_pos[,1],sub_pos[,2], type="p",
+     pch=1, col="red",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(sub_neg[,1],sub_neg[,2], type="p",pch=3, col="blue")
+lines(centroid_pos[1],centroid_pos[2], type="p",pch=13, col="red")
+lines(centroid_neg[1],centroid_neg[2], type="p",pch=16, col="blue")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+lines(x,lpos, type="l",lty=2, col="black")
+lines(x,lneg, type="l",lty=3, col="black")
+title(main="Step 3")
+
+# One-class recognition problem A
+plot(sub_pos[,1],sub_pos[,2], type="p",
+     pch=1, col="red",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(centroid_pos[1],centroid_pos[2], type="p",pch=13, col="red")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+lines(x,lpos, type="l",lty=2, col="black")
+legend("topright", inset=0.02, title="Samples",
+       legend=c("Positive Class","Negative Class","Test point","Positive Centroid", "Negative Centroid"), 
+       pch=c(1,3,8,13,16),
+       col=c("red","blue","green","red","blue"))
+title(main="Step 4")
+
+# One-class recognition problem B
+plot(sub_neg[,1],sub_neg[,2], type="p",
+     pch=3, col="blue",
+     xlab = "", ylab = "",
+     xlim=c(0,105),ylim=c(0,105))
+lines(centroid_neg[1],centroid_neg[2], type="p",pch=16, col="blue")
+lines(test_sample[1],test_sample[2], type="p",pch=8, col="green")
+lines(x,lneg, type="l",lty=3, col="black")
+legend("topright", inset=0.02, title="Hyperplanes",
+       legend=c("Ld","Lpos","Lneg"), 
+       lty=c(1,2,3),
+       col=c("black","black","black"))
+title(main="Step 5")
+
+par(opar)
+
+r <- 1
