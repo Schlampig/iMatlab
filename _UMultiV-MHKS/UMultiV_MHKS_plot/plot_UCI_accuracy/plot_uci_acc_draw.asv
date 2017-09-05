@@ -1,0 +1,63 @@
+
+clear;
+plot_uci_acc_set;
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+figure;
+plot(X(1,:),Y(1,:),'r-s',X(1,:),Y(2,:),'y-*',X(1,:),Y(3,:),'g-d',X(1,:),Y(4,:),'b-+','LineWidth',2,'MarkerSize',10);
+title('Iris/Accuracy','fontsize',20,'fontname','Times New Roman','fontweight','bold');
+xlabel('\beta','fontsize',18,'fontname','Times New Roman');
+ylabel('Percentage of Accuracy(%)','fontsize',18,'fontname','Times New Roman');
+legend('UMultiV-MHKS','MultiV-MHKS','MatMHKS','MHKS',0,'location','NorthEastOutside');
+set(gca,'Xticklabel',{'0.1',' ','0.3',' ','0.5',' ','0.7 '});
+axis([min(X(1,:)),max(X(1,:)),90,100]);
+grid on;
+
+
+%85-95
+figure;
+plot(X(1,:),Y_new(5,:),'r-+',X(1,:),Y_new(6,:),'b-^',X(1,:),Y_new(7,:),'k-*',X(1,:),Y_new(8,:),'r-o',X(1,:),Y_new(9,:),'b-s',X(1,:),Y_new(10,:),'k-d','LineWidth',2,'MarkerSize',10);
+title('ii) Subfigure (Min Accuracy 85%-95%)','fontsize',20,'fontname','Times New Roman','fontweight','bold');
+xlabel('Dimension of Parameter \lambda','fontsize',18,'fontname','Times New Roman');
+ylabel('Percentage of Accuracy(%)','fontsize',18,'fontname','Times New Roman');
+legend('Seeds','Wine','Housing','HoV','BaS','IoS',0,'location','NorthEastOutside');
+set(gca,'Xticklabel',{'0.01',' ','0.1',' ','1',' ','10 ',' ','100'});
+axis([min(X(1,:)),max(X(1,:)),87,97]);
+grid on;
+
+
+%75-85
+figure;
+plot(X(1,:),Y_new(11,:),'r-+',X(1,:),Y_new(12,:),'b-^',X(1,:),Y_new(13,:),'k-*',X(1,:),Y_new(14,:),'r-o',X(1,:),Y_new(15,:),'b-s',X(1,:),Y_new(16,:),'k-d','LineWidth',2,'MarkerSize',10);
+title('iii) Subfigure (Min Accuracy 75%-85%)','fontsize',20,'fontname','Times New Roman','fontweight','bold');
+xlabel('Dimension of Parameter \lambda','fontsize',18,'fontname','Times New Roman');
+ylabel('Percentage of Accuracy(%)','fontsize',18,'fontname','Times New Roman');
+legend('VeC','Ecoli','HoC','Lenses','TRA','Clean1',0,'location','NorthEastOutside');
+set(gca,'Xticklabel',{'0.01',' ','0.1',' ','1',' ','10 ',' ','100'});
+axis([min(X(1,:)),max(X(1,:)),76,87]);
+grid on;
+
+
+%-75
+figure;
+plot(X(1,:),Y_new(17,:),'r-+',X(1,:),Y_new(18,:),'b-^',X(1,:),Y_new(19,:),'k-*',X(1,:),Y_new(20,:),'r-o',X(1,:),Y_new(21,:),'b-s','LineWidth',2,'MarkerSize',10);
+title('iv) Subfigure (Min Accuracy <75%)','fontsize',20,'fontname','Times New Roman','fontweight','bold');
+xlabel('Dimension of Parameter \lambda','fontsize',18,'fontname','Times New Roman');
+ylabel('Percentage of Accuracy(%)','fontsize',18,'fontname','Times New Roman');
+legend('Sonar','Liver','Pima','MaM','Cmc',0,'location','NorthEastOutside');
+set(gca,'Xticklabel',{'0.01',' ','0.1',' ','1',' ','10 ',' ','100'});
+axis([min(X(1,:)),max(X(1,:)),50,75]);
+grid on;
+
+
+% figure;
+% plot(X(1,:),Y_new(20,:),'r-+',X(1,:),Y_new(21,:),'b-^','LineWidth',2,'MarkerSize',10);
+% title('v) Subfigure (Accuracy <65%)','fontsize',20,'fontname','Times New
+% Roman','fontweight','bold');
+% xlabel('Dimension of Parameter \lambda','fontsize',18,'fontname','Times New Roman');
+% ylabel('Percentage of Accuracy(%)','fontsize',18,'fontname','Times New Roman');
+% legend(,0,'location','NorthEastOutside');
+% set(gca,'Xticklabel',{'0.01',' ','0.1',' ','1',' ','10 ',' ','100'});
+% axis([min(X(1,:)),max(X(1,:)),50,55]);
+% grid on;
