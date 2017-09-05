@@ -1,0 +1,4 @@
+MTMFLD：Multi-Thresholds Modified Fisher Linear Discriminant
+多阈值修正Fisher线性判别分析
+
+统一统计了theta不同情况下的结果，并得到最优结果。
