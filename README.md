@@ -30,7 +30,7 @@ Chen, S., Wang, Z., & Tian, Y. (2007). Matrix-pattern-oriented Ho–Kashyap clas
 Zhu, Y., Wang, Z., & Gao, D. (2015). Matrixized learning machine with modified pairwise constraints. Pattern Recognition, 48(11), 3797-3809.
 
 √ RFLDS1/S2：
-Under review.
+Zhu, Y., Wang, Z., Cao C., & Gao, D. (2018) Regularized fisher linear discriminant through two threshold variation strategies for imbalanced problems, accepted (in press).
 
 √ SFSS-RF：
 Under review.
