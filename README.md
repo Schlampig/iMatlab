@@ -3,7 +3,7 @@
 References:
 
 √ BEPILD:
-Zhu, Y., Wang, Z., Zha, H., & Gao, D. (2017). Boundary-Eliminated Pseudoinverse Linear Discriminant for Imbalanced Problems. IEEE Transactions on Neural Networks and Learning Systems (in press).
+Zhu, Y., Wang, Z., Zha, H., & Gao, D. (2018). Boundary-Eliminated Pseudoinverse Linear Discriminant for Imbalanced Problems. IEEE Transactions on Neural Networks and Learning Systems, 29(6), 2581-2594.
 
 √ FCIMLM:
 Zhu, Y., Wang, Z., & Gao, D. (2016). Matrixized Learning Machine with Feature-Clustering Interpolation. Neural Processing Letters, 44(2), 291-306.
