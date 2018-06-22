@@ -18,7 +18,7 @@ Zhu, Y., Wang, Z., & Gao, D. (2015). Gravitational fixed radius nearest neighbor
 Wang, Z., Zhu, Y., Gao, D., & Guo, W. (2014). Globalized and localized matrix-pattern-oriented classification machine. Applied Soft Computing, 25, 379-390.
 
 √ GMFLLM：
-Under review.
+Zhu, Y., Wang, Z., Li, D., & Gao, D. (2017). GMFLLM: A general manifold framework unifying three classic models for dimensionality reduction. Engineering Applications of Artificial Intelligence, 65, 421-432.
 
 √ MatMHKS:
 Chen, S., Wang, Z., & Tian, Y. (2007). Matrix-pattern-oriented Ho–Kashyap classifier with regularization learning. Pattern Recognition, 40(5), 1533-1543.
@@ -30,7 +30,7 @@ Chen, S., Wang, Z., & Tian, Y. (2007). Matrix-pattern-oriented Ho–Kashyap clas
 Zhu, Y., Wang, Z., & Gao, D. (2015). Matrixized learning machine with modified pairwise constraints. Pattern Recognition, 48(11), 3797-3809.
 
 √ RFLDS1/S2：
-Zhu, Y., Wang, Z., Cao C., & Gao, D. (2018) Regularized fisher linear discriminant through two threshold variation strategies for imbalanced problems, accepted (in press).
+Zhu, Y., Wang, Z., Cao C., & Gao, D. (2018) Regularized fisher linear discriminant through two threshold variation strategies for imbalanced problems. Knowledge-Based Systems, 000, 1-17.
 
 √ SFSS-RF：
 Under review.
