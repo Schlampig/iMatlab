@@ -1,4 +1,4 @@
-# Self-trying for machine learning ideas by matlab.
+# Some ideas approached in MatLab.
 
 References:
 
